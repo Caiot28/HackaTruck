@@ -53,16 +53,73 @@ struct ContentView: View {
                         .background(
                             Color.gray,
                             in: Rectangle()
-                            
                         )
-                        
-                        
-                    
                 }
-                
             }
             .border(Color.gray, width: 3)
             Spacer()
+            VStack(alignment: .leading){
+                VStack(alignment: .leading){
+                    Text("Nome Sobrenome")
+                        .bold()
+                    Text("Bio")
+                    
+                
+                }
+                HStack{
+                    
+                }
+                HStack{
+                    VStack(spacing: 4){
+                        Image(systemName: "square.grid.3x3.fill")
+                            .padding()
+                        Rectangle()
+                            .size(CGSize(width: 120.0, height: 120.0))
+                            .foregroundColor(.gray)
+                        Rectangle()
+                            .size(CGSize(width: 120.0, height: 120.0))
+                            .foregroundColor(.gray)
+                        Rectangle()
+                            .size(CGSize(width: 120.0, height: 120.0))
+                            .foregroundColor(.gray)
+                        Spacer()
+                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 48)
+                    }
+                    
+                    VStack(spacing: 6){
+                        Image(systemName: "video")
+                            .padding()
+                        Rectangle()
+                            .size(CGSize(width: 120.0, height: 120.0))
+                            .foregroundColor(.gray)
+                        Rectangle()
+                            .size(CGSize(width: 120.0, height: 120.0))
+                            .foregroundColor(.gray)
+                        Rectangle()
+                            .size(CGSize(width: 120.0, height: 120.0))
+                            .foregroundColor(.gray)
+                        Spacer()
+                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 48)
+                    }
+                    
+                    VStack(spacing:4){
+                        Image(systemName: "photo.artframe")
+                            .padding()
+                        Rectangle()
+                            .size(CGSize(width: 120.0, height: 120.0))
+                            .foregroundColor(.gray)
+                        Rectangle()
+                            .size(CGSize(width: 120.0, height: 120.0))
+                            .foregroundColor(.gray)
+                        Rectangle()
+                            .size(CGSize(width: 120.0, height: 120.0))
+                            .foregroundColor(.gray)
+                        Spacer()
+                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 48)
+                    }
+                }
+                
+            }
         }
         .padding()
     }
