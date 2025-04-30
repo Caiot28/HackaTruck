@@ -93,13 +93,10 @@ struct InicioView: View {
                         .frame(width: 350, height: 100, alignment: .leading)
                         .bold()
                 }
- 
             }
             .padding()
         }
-        }
-    
-    
+    }
 }
 
 #Preview {

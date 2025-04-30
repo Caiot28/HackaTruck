@@ -13,29 +13,32 @@ struct Modo4: View {
         ZStack{
             Color.azulEscuro
                 .ignoresSafeArea()
-        
+            
             VStack{
-                Text("Modo 2")
-                    .foregroundColor(.white)
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                    .offset(y: -320)
-            }
-                
-            VStack(spacing: 20){
-        
-                Text("Volte, \(nome)")
-                    .foregroundColor(.white)
-                
-            }
-                
+                VStack{
+                    Text("Modo 2")
+                        .foregroundColor(.white)
+                        .font(.title)
+                }
+                Spacer()
+                VStack(spacing: 20){
+                    
+                    Text("Volte, \(nome)")
+                        .foregroundColor(.white)
+                    
+                }
+                .padding(40)
                 .background(Rectangle()
-                    .frame(width: 150, height: 100)
                     .cornerRadius(10)
                     .foregroundStyle(.rosa))
+                .shadow(radius: 10)
+    
+                Spacer()
             }
+        }
     }
 }
 
 #Preview {
-    Modo4(nome: $nome)
+    Modo4(nome: .constant("Teste"))
 }

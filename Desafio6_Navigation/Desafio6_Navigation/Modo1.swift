@@ -13,32 +13,30 @@ struct Modo1: View {
         ZStack{
             Color.azulEscuro
                 .ignoresSafeArea()
-        
             VStack{
-                Text("Modo 1")
-                    .foregroundColor(.white)
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                    .offset(y: -320)
-            }
-                
-            VStack(spacing: 20){
-        
-                Text("Nome: Caio")
-                    .foregroundColor(.white)
-                Text("Sobrenome: Teles")
-                    .foregroundColor(.white)
-            }
-                
+                VStack{
+                    Text("Modo 1")
+                        .foregroundColor(.white)
+                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                }
+                Spacer()
+                VStack(spacing: 20){
+                    
+                    Text("Nome: Caio")
+                        .foregroundColor(.white)
+                    Text("Sobrenome: Teles")
+                        .foregroundColor(.white)
+                }
                 .background(Rectangle()
-                    .frame(width: 250, height: 150)
+                    .frame(width: 200, height: 100)
                     .cornerRadius(10)
-                    .foregroundStyle(.rosa))
+                    .foregroundStyle(.rosa)
+                    .shadow(radius: 10))
+                
+                Spacer()
             }
-        
             
-            
-            
-        
+        }
     }
 }
 

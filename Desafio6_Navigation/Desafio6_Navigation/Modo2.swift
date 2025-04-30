@@ -8,41 +8,55 @@
 import SwiftUI
 
 struct Modo2: View {
-    @State var nome : String = "Caio"
+    @State var nome : String = ""
     var body: some View {
         ZStack{
             Color.azulEscuro
                 .ignoresSafeArea()
-        
+            
             VStack{
-                Text("Modo 2")
-                    .foregroundColor(.white)
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                    .offset(y: -320)
-            }
-                
-            VStack(spacing: 20){
-        
-                TextField(
-                    "Nome: ",
-                    text: $nome
-                )
-                .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                Text("Bem vindo, \(nome)")
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                    .bold()
-                
-                NavigationLink(destination: Modo4(nome: $nome)) {
-                    Text("Acessar tela")
+                VStack{
+                    Text("Modo 2")
+                        .foregroundColor(.white)
+                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 }
-            }
+                Spacer()
+                VStack(spacing: 20){
+                    
+                    TextField(
+                        "Nome: ",
+                        text: $nome
+                    )
+                    .font(.title)
+                    .padding()
+                    .multilineTextAlignment(.center)
+                    
+                    Text("Bem vindo, \(nome)")
+                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        .bold()
+                        .padding()
+                    
+                    NavigationLink(destination: Modo4(nome: $nome)) {
+                        Text("Acessar tela")
+                            .foregroundColor(.white)
+                    }
+                    .padding(20)
+                    .background(Rectangle()
+                        .cornerRadius(10)
+                        .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                        .shadow(radius: 10))
+                }
                 
                 .background(Rectangle()
-                    .frame(width: 350, height: 250)
                     .cornerRadius(10)
-                    .foregroundStyle(.rosa))
+                    .foregroundStyle(.rosa)
+                    .shadow(radius: 10)
+                    .frame(height: 300))
+                .padding()
+                
+                Spacer()
             }
+        }
     }
 }
 

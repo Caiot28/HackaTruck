@@ -10,19 +10,21 @@ import SwiftUI
 struct ContentView: View {
     @State private var showingCredits = false
     var body: some View {
-        
         NavigationStack{
             
             ZStack {
+                Color.azulEscuro
+                    .ignoresSafeArea()
                 VStack{
-                    Color.azulEscuro
-                    Image("logo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 350, height: 600)
-                        .offset(y: -210)
+                    VStack{
+                        Image("logo")
+                            .resizable()
+                            .scaledToFit()
+                            .scaledToFill()
+                            .frame(maxWidth: 300, maxHeight: 80)
+                        Spacer()
+                    }
                     
-                
                     VStack(spacing: 70){
                         NavigationLink(destination: Modo1()) {
                             Text("Modo 1")
@@ -31,9 +33,8 @@ struct ContentView: View {
                         .background(Rectangle()
                             .frame(width: 250, height: 80)
                             .cornerRadius(10)
-                            .foregroundStyle(.rosa))
-                        .offset(y: -350)
-                        
+                            .foregroundStyle(.rosa)
+                            .shadow(radius: 10))
                         
                         NavigationLink(destination: Modo2()) {
                             Text("Modo 2")
@@ -42,32 +43,28 @@ struct ContentView: View {
                         .background(Rectangle()
                             .frame(width: 250, height: 80)
                             .cornerRadius(10)
-                            .foregroundStyle(.rosa))
-                        .offset(y: -350)
-                        
+                            .foregroundStyle(.rosa)
+                            .shadow(radius: 10))
+                      
                         Button("Modo 3") {
-                                    showingCredits.toggle()
-                                }
+                            showingCredits.toggle()
+                        }
                         .foregroundColor(.white)
                         .background(Rectangle()
                             .frame(width: 250, height: 80)
                             .cornerRadius(10)
-                            .foregroundStyle(.rosa))
-                        .offset(y: -350)
-                        
-                                .sheet(isPresented: $showingCredits) {
-                                    Modo3()
-                                }
+                            .foregroundStyle(.rosa)
+                            .shadow(radius: 10))
+                        .sheet(isPresented: $showingCredits) {
+                            Modo3()
+                            
+                        }
+                        Spacer()
+                            .frame(height: 200)
                     }
                 }
-                
-                .background(Color.azulEscuro)
-                
             }
-            
         }
-        .background(Color.azulEscuro)
-        
     }
 }
 
