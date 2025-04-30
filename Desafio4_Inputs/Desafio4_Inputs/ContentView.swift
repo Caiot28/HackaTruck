@@ -28,7 +28,6 @@ struct ContentView: View {
                     .background(Color.white)
                     .cornerRadius(10)
                     
-                
                 Text("Digite o tempo (h)")
                 
                 TextField("", value: $tempo, format: .number)
@@ -37,9 +36,6 @@ struct ContentView: View {
                     .frame(width: 170, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .background(Color.white)
                     .cornerRadius(10)
-                
-                
-                
                 }
             
             Button(action: {
@@ -121,17 +117,11 @@ struct ContentView: View {
                 .background(Color.black)
                 .foregroundColor(.white)
                 .cornerRadius(10)
-                
-        
-        
         }
         .padding()
         .background(corFundo)
     }
-        
 }
-
-
 
 #Preview {
     ContentView()
