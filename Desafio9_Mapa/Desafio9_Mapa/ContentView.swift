@@ -15,10 +15,7 @@ struct Location: Hashable{
     let latitude: Double
     let longitude: Double
 }
-
 struct ContentView: View {
-    @State private var position = MapCameraPosition.region( MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 300, longitudeDelta: 1)))
-    @State private var showingCredits = false
     let arrayLocations = [
         Location(nome: "Cristo Redentor", foto: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Christ_the_Redeemer_-_Cristo_Redentor.jpg/800px-Christ_the_Redeemer_-_Cristo_Redentor.jpg", descricao: "Cristo Redentor é uma estátua que retrata Jesus Cristo localizada no topo do morro do Corcovado, a 709 metros acima do nível do mar, dentro do Parque Nacional da Tijuca. Tem vista para parte considerável da cidade brasileira do Rio de Janeiro, sendo a frente da estátua voltada para a Baía de Guanabara e as costas para a Floresta da Tijuca. Feito de concreto armado e pedra-sabão,tem trinta metros de altura (uma das maiores estátuas do mundo), sem contar os oito metros do pedestal, sendo a mais alta estátua do mundo no estilo Art Déco. Seus braços se esticam por 28 metros de largura e a estrutura pesa 1145 toneladas.", latitude: -22.951743, longitude: -43.21088),
         Location(nome: "Taj Mahal", foto: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Taj_Mahal_N-UP-A28-a.jpg/960px-Taj_Mahal_N-UP-A28-a.jpg", descricao: "O Taj Mahal (em hindi: ताज महल) é um mausoléu situado em Agra, na Índia, sendo o mais conhecido dos monumentos do país. Encontra-se classificado pela UNESCO como Patrimônio da Humanidade. Foi anunciado em 2007 como uma das sete maravilhas do mundo moderno. A obra foi feita entre 1632 e 1653 com a força de cerca de 20 mil homens, trazidos de várias cidades do Oriente, para trabalhar no suntuoso monumento de mármore branco que o imperador Shah Jahan mandou construir em memória de sua esposa favorita, Aryumand Banu Begam, a quem chamava de Mumtaz Mahal ('A joia do palácio'). Ela morreu após dar à luz o 14º filho, tendo o Taj Mahal sido construído sobre seu túmulo, junto ao rio Yamuna", latitude: 27.173891, longitude: 78.042068),
@@ -31,35 +28,57 @@ struct ContentView: View {
     ]
     @State var aux = Location(nome: "Cristo Redentor", foto: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Christ_the_Redeemer_-_Cristo_Redentor.jpg/800px-Christ_the_Redeemer_-_Cristo_Redentor.jpg", descricao: "Cristo Redentor é uma estátua que retrata Jesus Cristo localizada no topo do morro do Corcovado, a 709 metros acima do nível do mar, dentro do Parque Nacional da Tijuca. Tem vista para parte considerável da cidade brasileira do Rio de Janeiro, sendo a frente da estátua voltada para a Baía de Guanabara e as costas para a Floresta da Tijuca. Feito de concreto armado e pedra-sabão,tem trinta metros de altura (uma das maiores estátuas do mundo), sem contar os oito metros do pedestal, sendo a mais alta estátua do mundo no estilo Art Déco. Seus braços se esticam por 28 metros de largura e a estrutura pesa 1145 toneladas.", latitude: -22.951743, longitude: -43.21088)
     
-    @State private var selectedBeauty = 0
-    var beauties = ["Cristo Redentor", "Taj Mahal", "Coliseu"]
+    @State private var position = MapCameraPosition.region( MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: -22.951743, longitude: -43.21088), span: MKCoordinateSpan(latitudeDelta: 300, longitudeDelta: 1)))
+    
+    @State private var showingCredits = false
+    
+    @State private var selectedBeauty = Location(nome: "Cristo Redentor", foto: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Christ_the_Redeemer_-_Cristo_Redentor.jpg/800px-Christ_the_Redeemer_-_Cristo_Redentor.jpg", descricao: "Cristo Redentor é uma estátua que retrata Jesus Cristo localizada no topo do morro do Corcovado, a 709 metros acima do nível do mar, dentro do Parque Nacional da Tijuca. Tem vista para parte considerável da cidade brasileira do Rio de Janeiro, sendo a frente da estátua voltada para a Baía de Guanabara e as costas para a Floresta da Tijuca. Feito de concreto armado e pedra-sabão,tem trinta metros de altura (uma das maiores estátuas do mundo), sem contar os oito metros do pedestal, sendo a mais alta estátua do mundo no estilo Art Déco. Seus braços se esticam por 28 metros de largura e a estrutura pesa 1145 toneladas.", latitude: -22.951743, longitude: -43.21088)
+
     var body: some View {
+        
         ZStack{
+            
+            Map(position: $position){
+                ForEach(arrayLocations, id: \.self) { index in
+                    Annotation(index.nome, coordinate: CLLocationCoordinate2D(latitude: index.latitude, longitude: index.longitude)){
+                        
+                        Image(systemName: "mappin.circle.fill")
+                            .resizable()
+                            .foregroundStyle(.black)
+                            .frame(width: 40, height: 40)
+                            .clipShape(.circle)
+                            .onTapGesture{
+                                showingCredits.toggle()
+                                aux = index
+                                
+                                position = MapCameraPosition.region( MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: index.latitude, longitude: index.longitude), span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 1)))
+                            }
+                            .sheet(isPresented: $showingCredits) {
+                                sheetView(recebe: $aux)
+                            }
+                    }
+                }
+            }
             VStack{
                 Picker(selection: $selectedBeauty, label: Text("Maravilhas")){
-                    ForEach(0..<beauties.count, id: \.self){
-                        Text(self.beauties[$0])
+                    ForEach(arrayLocations, id: \.self){ i in
+                        Text(i.nome)
+                    }
+                    .onChange(of: selectedBeauty) { i in
+                        position = MapCameraPosition.region( MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: i.latitude, longitude: i.longitude), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0)))
                     }
                 }
-                Map(position: $position){
-                    ForEach(arrayLocations, id: \.self) { index in
-                        Annotation(index.nome, coordinate: CLLocationCoordinate2D(latitude: index.latitude, longitude: index.longitude)){
-                            
-                                Image(systemName: "mappin.circle.fill")
-                                    .resizable()
-                                    .foregroundStyle(.black)
-                                    .frame(width: 40, height: 40)
-                                    .clipShape(.circle)
-                                    .onTapGesture{
-                                        showingCredits.toggle()
-                                        aux = index
-                                    }
-                                .sheet(isPresented: $showingCredits) {
-                                    sheetView(recebe: $aux)
-                            }
-                        }
-                    }
-                }
+                .background(Rectangle()
+                    .fill(Color.yellow)
+                    .cornerRadius(10))
+                .accentColor(.black)
+                
+                Spacer()
+                Text("Mavavilhas do Mundo")
+                    .background(Rectangle()
+                        .fill(Color.yellow)
+                        .cornerRadius(10)
+                        .frame(width: 200, height: 30))
             }
         }
     }

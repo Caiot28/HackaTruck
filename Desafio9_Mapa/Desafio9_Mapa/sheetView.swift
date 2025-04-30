@@ -20,6 +20,7 @@ struct sheetView: View {
                         .scaledToFill()
                         .scaledToFit()
                         .frame(maxWidth: 300, maxHeight: 300)
+                        .padding()
                     
                 } placeholder: {
                     Image(systemName: "questionmark.app")
