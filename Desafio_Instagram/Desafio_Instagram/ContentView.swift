@@ -13,6 +13,7 @@ struct ContentView: View {
             HStack{
                 Text("Username")
                     .padding()
+                    .bold()
                 Spacer()
                 Image(systemName: "arrow.clockwise")
                 Image(systemName: "list.dash")
@@ -32,24 +33,28 @@ struct ContentView: View {
                             Text("0")
                             Text("Posts")
                                 .font(.caption)
+                                .bold()
                         }
                         .padding(10)
                         VStack{
                             Text("0")
                             Text("Seguidores")
                                 .font(.caption)
+                                .bold()
                         }
                         .padding(10)
                         VStack{
                             Text("0")
                             Text("Seguindo")
                                 .font(.caption)
+                                .bold()
 
                         }
                         .padding(10)
                     }
                     Text("Editar Perfil")
                         .padding(15)
+                        .bold()
                         .background(
                             Color.gray,
                             in: Rectangle()
@@ -85,7 +90,6 @@ struct ContentView: View {
                         Spacer()
                             .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 48)
                     }
-                    
                     VStack(spacing: 6){
                         Image(systemName: "video")
                             .padding()
@@ -117,6 +121,7 @@ struct ContentView: View {
                         Spacer()
                             .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 48)
                     }
+                    
                 }
                 
             }
